@@ -1,7 +1,6 @@
-import { useState } from "react";
-import Navbar from "./components/Navbar/Navbar";
-import Rodape from "./components/Footer/Footer";
-import Container from "./components/Container/Container";
+import Navbar from "./page/Navbar/Navbar";
+import Rodape from "./page/Footer/Footer";
+import Container from "./page/Container/Container";
 
 
 

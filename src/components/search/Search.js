@@ -1,7 +1,7 @@
-import styles from './Container.module.css'
+import styles from './Search.module.css'
 import { useState } from 'react'
 
-export default function Container(){
+export default function Search(){
 
     const [ city, setCity ] = useState('São Paulo')
     const [weatherForecast, setWeatherForecast ] = useState(null)
@@ -15,15 +15,15 @@ export default function Container(){
         .then(res => res.json())
         .then((data) => {
             setWeatherForecast(data)
-            console.log(data)
+            console.log(weatherForecast)
         })
         .catch(err => console.error(err))
     }
 
     return(
-        <main className={styles.container}>
-            { !weatherForecast ? (
+        <>
 
+        { !weatherForecast ? (
             <div className={styles.search}>
                 <div>
                     <h1>
@@ -46,30 +46,9 @@ export default function Container(){
                     </button>
                 </div>
             </div>
+        ) : null
 
-            ) : null }
-
-            { weatherForecast ? (
-                <div className={styles.content}>
-                    <div className={styles.form}>
-                        <form>
-                            <input
-                                onChange={handleChange}
-                                value={city} 
-                                placeholder='Ex: São Paulo'
-                            />
-                        </form>
-
-                        <button onClick={handleSearch}>
-                            Pesquisar
-                        </button>
-                    </div>
-                    <div>
-                        <img src={weatherForecast.current.condition.icon} />
-                    </div>
-                </div>
-            ) : null }
-
-        </main>
+        }
+        </>
     )
 }
