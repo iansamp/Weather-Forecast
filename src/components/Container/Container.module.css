@@ -1,0 +1,118 @@
+.container{
+    display: flex;
+    justify-content: center;
+    height: 440px;
+}
+
+.search{
+    margin-top: 2em;
+    width: 500px;
+    height: 300px;
+    box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
+    border-radius: 5px;
+    background-color: #FFF;
+}
+
+.search div{
+    padding: 1em;
+}
+
+.search div h1{
+    font-size: 30px;
+    padding-bottom: .5em;
+}
+
+.search div p {
+    font-size: 13px;
+    padding-bottom: .5em;
+}
+
+.search div form input{
+    padding: .7em;
+    border-radius: 0;
+    border: 1px solid #7b7b7b;
+    margin-bottom: .5em;
+}
+
+.search div form input::placeholder{
+    color: #7b7b7b;
+}
+
+.search div button {
+    background-color: #222;
+    color: #FFF;
+    padding: 0.7em 1.2em;
+    text-decoration: none;
+    transition: .5s;
+    cursor: pointer;
+    border: none; 
+}
+
+.search div button:hover{
+    color: rgb(0, 140, 182);
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.content .form{
+    display: flex;
+    padding: 1em;
+}
+
+.content .form form input{
+    padding: .7em;
+    width: 250px;
+    border-radius: 0;
+    border: 1px solid #7b7b7b;
+    margin-bottom: .5em;
+}
+
+.content .form form input::placeholder{
+    color: #7b7b7b;
+}
+
+.content .form button {
+    background-color: #222;
+    color: #FFF;
+    padding: 0.5em 1.2em;
+    text-decoration: none;
+    transition: .5s;
+    cursor: pointer;
+    border: none;
+    margin-left: 1em; 
+}
+
+.content .form button:hover{
+    color: rgb(0, 140, 182);
+}
+
+.weather div{
+    display: flex;
+}
+.weather div div{
+    padding: 2em;
+}
+
+.weather div div img{
+    width: 75px;
+    height: 75px;
+    margin-right: 1em;
+}
+
+.weather div div .temp{
+    font-size: 50px;
+    margin-right: .5em;
+}
+
+.weather div div .temp span{
+    font-size: 20px;
+    font-weight: normal;
+}
+
+.description{
+    font-size: 15px;
+}
