@@ -1,5 +1,6 @@
 import styles from './Container.module.css'
 import { useState } from 'react'
+import { BiMap } from 'react-icons/bi'
 
 export default function Container(){
 
@@ -10,15 +11,38 @@ export default function Container(){
         setCity(e.target.value)
     })
 
-    const handleSearch = () => {
-        fetch(`http://api.weatherapi.com/v1/current.json?key=35a27291350e4dc19cb134451230505&q=${city}&lang=pt`)
-        .then(res => res.json())
+    const handleSearch = (e) => {
+        e.preventDefault();
+
+        if (city === "") {
+            return;
+        }
+
+        Promise.all([
+            fetch(`http://api.weatherapi.com/v1/current.json?key=35a27291350e4dc19cb134451230505&q=${city}&lang=pt`),
+            fetch(`http://api.weatherapi.com/v1/forecast.json?key=35a27291350e4dc19cb134451230505&q=${city}&lang=pt`)
+        ])
+
+        .then(responses => Promise.all(responses.map(response => response.json())))
         .then((data) => {
-            setWeatherForecast(data)
+            const dataCurrent = data[0];
+            const dataForecast = data[1];
+            setWeatherForecast(dataCurrent, dataForecast)
             console.log(data)
         })
         .catch(err => console.error(err))
+
+        setCity("");
     }
+
+    const handleKeyDown = (event) => {
+        if (event.key === "Enter") {
+            handleSearch(event);
+        }
+    };
+
+
+    //const [ autoComplete, setAutoComplete ] = useState('')
 
     return(
         <main className={styles.container}>
@@ -36,6 +60,7 @@ export default function Container(){
                     <form>
                         <input
                             onChange={handleChange}
+                            onKeyDown={handleKeyDown}
                             value={city} 
                             placeholder='Ex: São Paulo'
                         />
@@ -55,6 +80,7 @@ export default function Container(){
                         <form>
                             <input
                                 onChange={handleChange}
+                                onKeyDown={handleKeyDown}
                                 value={city} 
                                 placeholder='Ex: São Paulo'
                             />
@@ -65,7 +91,12 @@ export default function Container(){
                         </button>
                     </div>
                     <div className={styles.weather}>
-                        <div>
+                            <div className={styles.name}>
+                                <p>
+                                     <BiMap/> {weatherForecast.location.name}-{weatherForecast.location.region}
+                                </p>
+                            </div>
+
                             <div>
                                 <img src={weatherForecast.current.condition.icon} />
                                 <p className={styles.temp}>
@@ -80,7 +111,6 @@ export default function Container(){
                                     Humidade: {weatherForecast.current.humidity}% <br/>
                                 </p>
                             </div>
-                        </div>
                     </div>
                 </div>
             ) : null }
